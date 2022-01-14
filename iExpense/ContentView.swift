@@ -8,9 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var showingSheet = false
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Button("Show Sheet") {
+            showingSheet.toggle()
+        }
+        .sheet(isPresented: $showingSheet) {
+            SecondView(name: "Yuri")
+        }
+    }
+}
+
+struct SecondView: View {
+    let name: String
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        Button("Dismiss") {
+            dismiss()
+        }
     }
 }
 
